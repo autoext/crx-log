@@ -13,10 +13,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@types/chrome": "0.0.91"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@types/chrome": "0.0.91",
     "rimraf": "^3.0.2",
     "ts-loader": "^6.2.1",
     "webpack": "^4.42.0",

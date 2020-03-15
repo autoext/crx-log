@@ -16,28 +16,26 @@ enum EventType {
 
 interface iCrxInfo {
   /** 名称 */
-  name: String,
+  name: string,
   /** 版本 */
-  version: String,
+  version: string,
+  /** app id */
+  appId: string,
   /** 日期 */
-  date: String,
+  date: string,
   /** 事件类型 */
   type: EventType,
-  /** 次数 */
-  count: String | number,
   /** 浏览器UA */
-  UA: String,
-  /** 来源 */
-  referrer: String,
+  UA: string,
 };
 
-const report = (crxInfo: iCrxInfo) => {
+const sendReq = <T>(data: T) => {
   return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(crxInfo),
+    body: JSON.stringify(data),
   }).catch(err => {
     console.log(`Crx-Report:${err}`);
   });
@@ -54,10 +52,20 @@ const getAppInfo = () => {
   return {
     name,
     version,
+    appId: chrome.runtime.id,
   };
+};
+
+/** 报活 */
+const report = () => {
+  const crxInfo = getAppInfo();
+  return sendReq<iCrxInfo>((<any>Object).assign({
+    date: new Date().toLocaleString(),
+    UA: window?.navigator?.userAgent,
+    type: EventType.PV,
+  }, crxInfo));
 };
 
 export default {
   report,
-  getAppInfo,
 }
