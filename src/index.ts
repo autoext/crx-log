@@ -1,3 +1,7 @@
+/**
+ * CRX 埋点上报
+ */
+
 import { url } from './config';
 
 /** 支持上报的的事件类型 */
@@ -11,13 +15,20 @@ enum EventType {
 };
 
 interface iCrxInfo {
-  name: String, // 名称
-  version: String, // 版本
-  date: String, // 日期
-  type: EventType, // 事件类型
-  count: String | number, // 次数
-  UA: String, // 浏览器UA
-  referrer: String, // 来源
+  /** 名称 */
+  name: String,
+  /** 版本 */
+  version: String,
+  /** 日期 */
+  date: String,
+  /** 事件类型 */
+  type: EventType,
+  /** 次数 */
+  count: String | number,
+  /** 浏览器UA */
+  UA: String,
+  /** 来源 */
+  referrer: String,
 };
 
 const report = (crxInfo: iCrxInfo) => {
