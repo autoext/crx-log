@@ -21,12 +21,8 @@ interface iCrxInfo {
   version: string,
   /** app id */
   appId: string,
-  /** 日期 */
-  date: string,
   /** 事件类型 */
   type: EventType,
-  /** 浏览器UA */
-  UA: string,
 };
 
 const sendReq = <T>(data: T) => {
@@ -60,8 +56,6 @@ const getAppInfo = () => {
 const report = () => {
   const crxInfo = getAppInfo();
   return sendReq<iCrxInfo>((<any>Object).assign({
-    date: new Date().toLocaleString(),
-    UA: window?.navigator?.userAgent,
     type: EventType.PV,
   }, crxInfo));
 };
