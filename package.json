@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "rimraf -rf ./dist && webpack --mode=production"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "@types/chrome": "0.0.91"
+  },
+  "devDependencies": {
+    "rimraf": "^3.0.2",
+    "ts-loader": "^6.2.1",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
   }
 }

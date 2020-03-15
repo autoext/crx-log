@@ -1,10 +1,14 @@
-import {url} from './config';
+import { url } from './config';
 
-// 支持上报的的事件类型
-type EventType = 'active' // 报活
-  | 'click' // 事件
-  | 'pv' // 页面展现
-;
+/** 支持上报的的事件类型 */
+enum EventType {
+  /** 报活 */
+  ACTIVE = 'active',
+  /** 事件 */
+  CLICK = 'click',
+  /** 页面展现 */
+  PV = 'pv',
+};
 
 interface iCrxInfo {
   name: String, // 名称
@@ -23,15 +27,15 @@ const report = (crxInfo: iCrxInfo) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(crxInfo),
-  }).catch(err=>{
-    console.log( `Crx-Report:${err}` );
+  }).catch(err => {
+    console.log(`Crx-Report:${err}`);
   });
 };
 
 /**
  * 获取 crx manifest 信息
  */
-const getAppInfo = ()=>{
+const getAppInfo = () => {
   const {
     name,
     version,
