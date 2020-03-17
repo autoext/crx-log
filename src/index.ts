@@ -2,7 +2,7 @@
  * CRX 埋点上报
  */
 
-import { url } from './config';
+import { URL } from './config';
 
 /** 支持上报的的事件类型 */
 enum EventType {
@@ -25,7 +25,7 @@ interface iCrxInfo {
   type: EventType,
 };
 
-const sendReq = <T>(data: T) => {
+const sendReq = <T>(url: string, data: T) => {
   return fetch(url, {
     method: 'POST',
     headers: {
@@ -54,9 +54,9 @@ const getAppInfo = () => {
 };
 
 /** 报活 */
-const report = () => {
+const report = (url = URL) => {
   const crxInfo = getAppInfo();
-  return sendReq<iCrxInfo>((<any>Object).assign({
+  return sendReq<iCrxInfo>(url, (<any>Object).assign({
     type: EventType.PV,
   }, crxInfo));
 };
