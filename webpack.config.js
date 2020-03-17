@@ -1,7 +1,9 @@
 const webpack = require('webpack');
 const pkg = require('./package');
 
-const {version} = pkg;
+const {
+  version
+} = pkg;
 
 const banner = `crx-log v${version}
 ${new Date().toLocaleString()}`;
@@ -29,6 +31,9 @@ module.exports = {
   plugins: [
     new webpack.BannerPlugin({
       banner,
+    }),
+    new webpack.DefinePlugin({
+      'process.env.VERSION': JSON.stringify(version),
     }),
   ]
 };

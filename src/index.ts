@@ -47,8 +47,9 @@ const getAppInfo = () => {
   } = chrome.runtime.getManifest();
   return {
     name,
-    version,
+    version, // crx version
     appId: chrome.runtime.id,
+    v: process.env.VERSION, // sdk version
   };
 };
 
