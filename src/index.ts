@@ -102,6 +102,4 @@ const report = () => {
   }, crxInfo));
 };
 
-export default {
-  report,
-}
+report();
