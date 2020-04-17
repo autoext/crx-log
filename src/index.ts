@@ -14,7 +14,7 @@ enum EventType {
   PV = 'pv',
 };
 
-interface iCrxInfo {
+interface ICrxInfo {
   /** 名称 */
   name: string,
   /** 版本 */
@@ -24,6 +24,11 @@ interface iCrxInfo {
   /** 事件类型 */
   type: EventType,
 };
+
+interface IReportData extends ICrxInfo {
+  /** SDK version */
+  v: string;
+}
 
 const sendReq = <T>(url: string, data: T) => {
   return fetch(url, {
@@ -49,15 +54,15 @@ const getAppInfo = () => {
     name,
     version, // crx version
     appId: chrome.runtime.id,
-    v: process.env.VERSION, // sdk version
   };
 };
 
 /** 报活 */
 const report = (url = URL) => {
   const crxInfo = getAppInfo();
-  return sendReq<iCrxInfo>(url, (<any>Object).assign({
+  return sendReq<IReportData>(url, (<any>Object).assign({
     type: EventType.PV,
+    v: process.env.VERSION, // sdk version
   }, crxInfo));
 };
 

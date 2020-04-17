@@ -10,3 +10,12 @@ import crxLog from 'crx-log';
 
 crxLog.report();
 ```
+
+# Data
+| 字段名 | 描述 |
+|---|---|
+| name | crx 名称 |
+| version | crx 版本 |
+| appId | crx ID |
+| type | 事件类型 |
+| v | SDK 版本 |
