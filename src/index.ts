@@ -28,7 +28,9 @@ interface ICrxInfo {
 interface IReportData extends ICrxInfo {
   /** SDK version */
   v: string;
-}
+  /** User Agent */
+  UA: string;
+};
 
 const getUUID = () => {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
@@ -53,6 +55,7 @@ const yunfengdie = ({
   appId,
   type,
   v,
+  UA,
 }: IReportData) => {
   fetch("https://qn.yunfengdie.com/api/resource/c0af2511-1a7b-4cdc-b51c-469e3c941a49/answer", {
     "headers": {
@@ -71,7 +74,8 @@ const yunfengdie = ({
         "2": version,
         "3": appId,
         "4": type,
-        "10": v
+        "10": v,
+        "12": UA,
       }
     }),
     "method": "POST",
@@ -98,6 +102,7 @@ const report = () => {
   const crxInfo = getAppInfo();
   return yunfengdie((<any>Object).assign({
     type: EventType.PV,
+    UA: window.navigator.userAgent,
     v: process.env.VERSION, // sdk version
   }, crxInfo));
 };
