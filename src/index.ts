@@ -80,7 +80,7 @@ const yunfengdie = ({
     }),
     "method": "POST",
   });
-}
+};
 
 /**
  * 获取 crx manifest 信息
@@ -107,4 +107,13 @@ const report = () => {
   }, crxInfo));
 };
 
-report();
+const once = (task: () => void) => {
+  const isReported = localStorage.getItem('reported');
+
+  if (isReported !== '1' && task) {
+    task();
+    localStorage.setItem('reported', '1');
+  }
+};
+
+once(report);
