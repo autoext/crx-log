@@ -57,6 +57,8 @@ const yunfengdie = ({
   v,
   UA,
 }: IReportData) => {
+  const clientId = getClientId();
+
   fetch("https://qn.yunfengdie.com/api/resource/c0af2511-1a7b-4cdc-b51c-469e3c941a49/answer", {
     "headers": {
       "accept": "application/json",
@@ -64,7 +66,7 @@ const yunfengdie = ({
     },
     "body": JSON.stringify({
       "id": "c0af2511-1a7b-4cdc-b51c-469e3c941a49",
-      "clientId": getClientId(),
+      "clientId": clientId,
       "env": {
         "version": "x",
         "href": "https://render.yunfengdie.cn/p/q/crx/crx.html"
@@ -76,6 +78,7 @@ const yunfengdie = ({
         "4": type,
         "10": v,
         "12": UA,
+        "14": clientId,
       }
     }),
     "method": "POST",
