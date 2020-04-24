@@ -17,7 +17,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/chrome": "0.0.91",
-    "@types/node": "^13.9.1",
+    "@types/node": "^13.13.2",
     "rimraf": "^3.0.2",
     "ts-loader": "^6.2.1",
     "webpack": "^4.42.0",
