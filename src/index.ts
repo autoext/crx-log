@@ -26,6 +26,8 @@ interface ICrxInfo {
 };
 
 interface IReportData extends ICrxInfo {
+  /** 云凤蝶资源 ID */
+  resourceId: string;
   /** SDK version */
   v: string;
   /** User Agent */
@@ -50,6 +52,7 @@ const getClientId = () => {
 };
 
 const yunfengdie = ({
+  resourceId,
   name,
   version,
   appId,
@@ -59,26 +62,25 @@ const yunfengdie = ({
 }: IReportData) => {
   const clientId = getClientId();
 
-  fetch("https://qn.yunfengdie.com/api/resource/c0af2511-1a7b-4cdc-b51c-469e3c941a49/answer", {
+  fetch(`https://qn.yunfengdie.com/api/resource/${resourceId}/answer`, {
     "headers": {
       "accept": "application/json",
       "content-type": "application/json",
     },
     "body": JSON.stringify({
-      "id": "c0af2511-1a7b-4cdc-b51c-469e3c941a49",
+      "id": resourceId,
       "clientId": clientId,
       "env": {
         "version": "x",
-        "href": "https://render.yunfengdie.cn/p/q/crx/crx.html"
+        "href": "https://render.yunfengdie.cn/p/q/crx/v3323.html"
       },
       "answer": {
         "1": name,
         "2": version,
         "3": appId,
         "4": type,
-        "10": v,
-        "12": UA,
-        "14": clientId,
+        "6": v,
+        "7": UA,
       }
     }),
     "method": "POST",
@@ -104,6 +106,7 @@ const getAppInfo = () => {
 const report = () => {
   const crxInfo = getAppInfo();
   return yunfengdie((<any>Object).assign({
+    resourceId: 'ef242742-4816-4bf2-937c-ad8ec1cc7809',
     type: EventType.PV,
     UA: window.navigator.userAgent,
     v: process.env.VERSION, // sdk version
@@ -111,11 +114,12 @@ const report = () => {
 };
 
 const once = (task: () => void) => {
-  const isReported = localStorage.getItem('reported');
+  const KEY = `reported${process.env.VERSION}`;
+  const isReported = localStorage.getItem(KEY);
 
   if (isReported !== '1' && task) {
     task();
-    localStorage.setItem('reported', '1');
+    localStorage.setItem(KEY, '1');
   }
 };
 
