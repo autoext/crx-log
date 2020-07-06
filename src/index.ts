@@ -2,7 +2,7 @@
  * CRX 埋点上报
  */
 
-import { URL } from './config';
+// import { URL } from './config';
 
 /** 支持上报的的事件类型 */
 enum EventType {
@@ -21,17 +21,23 @@ interface ICrxInfo {
   version: string,
   /** app id */
   appId: string,
-  /** 事件类型 */
-  type: EventType,
 };
 
-interface IReportData extends ICrxInfo {
+// interface IForm extends ICrxInfo {
+//   /** 云凤蝶资源 ID */
+//   resourceId: string;
+//   /** SDK version */
+//   v: string;
+//   /** User Agent */
+//   UA: string;
+//   /** 事件类型 */
+//   type: EventType,
+// }
+
+interface IReportData {
   /** 云凤蝶资源 ID */
   resourceId: string;
-  /** SDK version */
-  v: string;
-  /** User Agent */
-  UA: string;
+  form: any,
 };
 
 const getUUID = () => {
@@ -53,12 +59,7 @@ const getClientId = () => {
 
 const yunfengdie = ({
   resourceId,
-  name,
-  version,
-  appId,
-  type,
-  v,
-  UA,
+  form,
 }: IReportData) => {
   const clientId = getClientId();
 
@@ -74,14 +75,7 @@ const yunfengdie = ({
         "version": "x",
         "href": "https://render.yunfengdie.cn/p/q/crx/v3323.html"
       },
-      "answer": {
-        "1": name,
-        "2": version,
-        "3": appId,
-        "4": type,
-        "6": v,
-        "7": UA,
-      }
+      "answer": form,
     }),
     "method": "POST",
   });
@@ -90,7 +84,7 @@ const yunfengdie = ({
 /**
  * 获取 crx manifest 信息
  */
-const getAppInfo = () => {
+const getAppInfo = (): ICrxInfo => {
   const {
     name,
     version,
@@ -102,19 +96,34 @@ const getAppInfo = () => {
   };
 };
 
+const {
+  name: crxName,
+  version,
+  appId,
+} = getAppInfo();
+
 /** 报活 */
 const report = () => {
-  const crxInfo = getAppInfo();
-  return yunfengdie((<any>Object).assign({
+
+  const type = EventType.PV;
+  const UA = window.navigator.userAgent;
+  const v = process.env.VERSION; // sdk version
+
+  return yunfengdie({
     resourceId: 'ef242742-4816-4bf2-937c-ad8ec1cc7809',
-    type: EventType.PV,
-    UA: window.navigator.userAgent,
-    v: process.env.VERSION, // sdk version
-  }, crxInfo));
+    form: {
+      "1": crxName,
+      "2": version,
+      "3": appId,
+      "4": type,
+      "6": v,
+      "7": UA,
+    }
+  });
 };
 
 const once = (task: () => void) => {
-  const KEY = `reported${process.env.VERSION}`;
+  const KEY = `reported${version}`;
   const isReported = localStorage.getItem(KEY);
 
   if (isReported !== '1' && task) {
