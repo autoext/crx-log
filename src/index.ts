@@ -37,7 +37,9 @@ interface ICrxInfo {
 interface IReportData {
   /** 云凤蝶资源 ID */
   resourceId: string;
-  form: any,
+  form: {
+    [key: string]: string;
+  },
 };
 
 const getUUID = () => {
@@ -97,28 +99,15 @@ const getAppInfo = (): ICrxInfo => {
 };
 
 const {
-  name: crxName,
   version,
-  appId,
 } = getAppInfo();
 
 /** 报活 */
-const report = () => {
-
-  const type = EventType.PV;
-  const UA = window.navigator.userAgent;
-  const v = process.env.VERSION; // sdk version
+const report = ({ form, resourceId }: IReportData) => {
 
   return yunfengdie({
-    resourceId: 'ef242742-4816-4bf2-937c-ad8ec1cc7809',
-    form: {
-      "1": crxName,
-      "2": version,
-      "3": appId,
-      "4": type,
-      "6": v,
-      "7": UA,
-    }
+    resourceId,
+    form,
   });
 };
 
@@ -132,4 +121,6 @@ const once = (task: () => void) => {
   }
 };
 
-once(report);
+export default ({ form, resourceId }: IReportData) => {
+  once(() => report({ form, resourceId }));
+};
