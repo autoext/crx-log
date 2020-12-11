@@ -121,6 +121,10 @@ const once = (task: () => void) => {
   }
 };
 
-export default ({ form, resourceId }: IReportData) => {
-  once(() => report({ form, resourceId }));
-};
+export default {
+  /** 报活，只上报一次 */
+  active({ form, resourceId }: IReportData) {
+    once(() => report({ form, resourceId }));
+  },
+  report,
+}
