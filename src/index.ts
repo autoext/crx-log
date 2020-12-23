@@ -38,7 +38,7 @@ interface IForm {
   [key: string]: string;
 }
 
-interface IReportData {
+export interface IReportData {
   /** 云凤蝶资源 ID */
   resourceId: string;
   form: IForm,
@@ -127,7 +127,7 @@ class CrxLog {
   resourceId: string;
   form: IForm;
 
-  constructor(form: IForm, resourceId: string) {
+  constructor({ resourceId, form }: IReportData) {
     this.resourceId = resourceId;
     this.form = form;
   }
