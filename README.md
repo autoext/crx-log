@@ -2,16 +2,23 @@
 > 通用 crx 埋点上报
 
 # Install
-> npm i --save git+ssh://git@gitee.com:g8up/crx-log.git#master
+> npm i --save git+ssh://git@gitee.com:g8up/crx-log.git#v1.6.0
 
 # Usage
 ```js
-import crxLog from 'crx-log';
+import CrxLog from 'crx-log';
 
-crxLog.report();
+const crxLog = new CrxLog({
+  resourceId: 'xxx',
+  form: {
+    // ...
+  },
+});
+
+crxLog.active(); // 报活1次
 ```
 
-# Data
+# 常用字段(form)
 | 字段名 | 描述 |
 |---|---|
 | name | crx 名称 |
