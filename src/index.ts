@@ -34,12 +34,14 @@ interface ICrxInfo {
 //   type: EventType,
 // }
 
+interface IForm {
+  [key: string]: string;
+}
+
 interface IReportData {
   /** 云凤蝶资源 ID */
   resourceId: string;
-  form: {
-    [key: string]: string;
-  },
+  form: IForm,
 };
 
 const getUUID = () => {
@@ -103,7 +105,7 @@ const {
 } = getAppInfo();
 
 /** 报活 */
-const report = ({ form, resourceId }: IReportData) => {
+export const report = ({ form, resourceId }: IReportData) => {
 
   return yunfengdie({
     resourceId,
@@ -121,10 +123,24 @@ const once = (task: () => void) => {
   }
 };
 
-export default {
+class CrxLog {
+  resourceId: string;
+  form: IForm;
+
+  constructor(form: IForm, resourceId: string) {
+    this.resourceId = resourceId;
+    this.form = form;
+  }
+
   /** 报活，只上报一次 */
-  active({ form, resourceId }: IReportData) {
-    once(() => report({ form, resourceId }));
-  },
-  report,
+  active() {
+    once(() => this.report());
+  }
+
+  /** 上报 */
+  report() {
+    report({ resourceId: this.resourceId, form: this.form });
+  }
 }
+
+export default CrxLog;
