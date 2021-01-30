@@ -15,8 +15,12 @@ const crxLog = new CrxLog({
   },
 });
 
-crxLog.active(); // 报活1次
+// 报活1次
+crxLog.active({
+  // key: val
+});
 ```
+- [form 字段提取](https://gitee.com/g8up/crx-log/wikis/%E4%BA%91%E5%87%A4%E8%9D%B6?sort_id=2220325)
 
 # 常用字段(form)
 | 字段名 | 描述 |

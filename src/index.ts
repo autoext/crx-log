@@ -100,9 +100,7 @@ const getAppInfo = (): ICrxInfo => {
   };
 };
 
-const {
-  version,
-} = getAppInfo();
+const version = process.env.VERSION;
 
 /** 报活 */
 export const report = ({ form, resourceId }: IReportData) => {
@@ -126,6 +124,7 @@ const once = (task: () => void) => {
 class CrxLog {
   resourceId: string;
   form: IForm;
+  EventType = EventType;
 
   constructor({ resourceId, form }: IReportData) {
     this.resourceId = resourceId;
@@ -133,13 +132,13 @@ class CrxLog {
   }
 
   /** 报活，只上报一次 */
-  active() {
-    once(() => this.report());
+  active(formPartial?: Partial<IForm>) {
+    once(() => this.report(formPartial));
   }
 
   /** 上报 */
-  report() {
-    report({ resourceId: this.resourceId, form: this.form });
+  report(formPartial?: Partial<IForm>) {
+    report({ resourceId: this.resourceId, form: Object.assign(this.form, formPartial) });
   }
 }
 
