@@ -1,5 +1,1 @@
-export declare const URL = "http://log.getcrx.cn/v1/report";
-declare const _default: {
-    URL: string;
-};
-export default _default;
+export declare const URL_PRIFIX = "http://g8up.chromedevtools.com";
