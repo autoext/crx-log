@@ -6,7 +6,7 @@
 
 # Usage
 ```js
-import CrxLog from 'crx-log';
+import CrxLog from 'crx-log/src';
 
 const crxLog = new CrxLog({
   urlPrifx: 'http://g8up.chromedevtools.com',
