@@ -1,5 +1,5 @@
 {
-  "name": "crx-log",
+  "name": "@autoext/crx-log",
   "version": "2.1.0",
   "description": "",
   "main": "./dist/index.js",
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@gitee.com:g8up/crx-log.git"
+    "url": "git@github.com:autoext/crx-log.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "g8up",
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
