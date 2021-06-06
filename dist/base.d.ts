@@ -5,6 +5,8 @@
 declare enum EventType {
     /** 报活 */
     ACTIVE = "active",
+    /** 安装 */
+    INSTALL = "install",
     /** 卸载 */
     UNINSTALL = "uninstall",
     /** 事件 */
@@ -51,6 +53,8 @@ declare class Log<ICustomCommonPayload, IRespData> {
     report(payload: IPayload): Promise<IRespData>;
     /** 报活 */
     active(): Promise<IRespData>;
+    /** 安装 */
+    install(): Promise<IRespData>;
     /** 卸载 */
     uninstall(): Promise<IRespData>;
 }

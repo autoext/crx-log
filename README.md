@@ -2,7 +2,7 @@
 > 通用 crx 埋点上报
 
 # Install
-> npm i --save git+ssh://git@gitee.com:g8up/crx-log.git#v2.0.0
+> npm i --save git+ssh://git@gitee.com:g8up/crx-log.git#v2.1.0
 
 # Usage
 ```js
