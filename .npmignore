@@ -1,4 +1,7 @@
-src/
 .vscode/
 config.json
 !dist/
+.github/
+webpack.config.js
+docs/
+tsconfig.json
