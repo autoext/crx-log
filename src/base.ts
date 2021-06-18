@@ -6,6 +6,8 @@
 enum EventType {
   /** 报活 */
   ACTIVE = 'active',
+  /** 更新 */
+  UPDATE = 'update',
   /** 安装 */
   INSTALL = 'install',
   /** 卸载 */
@@ -78,6 +80,13 @@ class Log<ICustomCommonPayload, IRespData> {
   active() {
     return this.report({
       event: EventType.ACTIVE,
+    });
+  }
+
+  /** 更新 */
+  update() {
+    return this.report({
+      event: EventType.UPDATE,
     });
   }
 

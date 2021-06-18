@@ -31,4 +31,4 @@ crxLog.uninstall();
 | version | crx 版本 |
 | appId | crx ID |
 | type | 上报类型('crx') |
-| event | 事件类型('active', 'install', 'uninstall') |
+| event | 事件类型('active', 'update', 'install', 'uninstall') |
