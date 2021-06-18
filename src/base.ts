@@ -84,7 +84,7 @@ class Log<ICustomCommonPayload, IRespData> {
   /** 安装 */
   install() {
     return this.report({
-      event: EventType.UNINSTALL,
+      event: EventType.INSTALL,
     });
   }
 

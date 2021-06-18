@@ -2,7 +2,7 @@
 > 通用 crx 埋点上报
 
 # Install
-> npm i --save git+ssh://git@gitee.com:g8up/crx-log.git#v2.1.0
+> npm i --save @autoext/crx-log
 
 # Usage
 ```js
@@ -13,6 +13,9 @@ const crxLog = new CrxLog({
   httpUtil: xxx, // 请求工具
   commonPayload: {},
 });
+
+// 安装
+crxLog.install();
 
 // 报活
 crxLog.active();
@@ -28,4 +31,4 @@ crxLog.uninstall();
 | version | crx 版本 |
 | appId | crx ID |
 | type | 上报类型('crx') |
-| event | 事件类型('active', 'uninstall') |
+| event | 事件类型('active', 'install', 'uninstall') |
