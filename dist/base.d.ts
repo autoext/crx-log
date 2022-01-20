@@ -1,7 +1,7 @@
 /**
  * 埋点上报
  */
-/** 支持上报的的事件类型 */
+/** 支持上报的的事件类型，todo： 外部如何扩展属性 */
 declare enum EventType {
     /** 报活 */
     ACTIVE = "active",
@@ -33,8 +33,9 @@ interface ICommonPayload extends ICrxInfo {
     /** log type */
     type: ILogType;
 }
-export interface IPayload {
-    event: EventType;
+export interface IPayload<ExtEventType> {
+    event: EventType | ExtEventType | string;
+    [key: string]: EventType | ExtEventType | string;
 }
 declare type IHttpPayload<ICustomCommonPayload> = ICommonPayload & ICustomCommonPayload;
 interface IHttpUtil<ICustomCommonPayload, IRespData> {
@@ -52,7 +53,7 @@ declare class Log<ICustomCommonPayload, IRespData> {
     httpUtil: IHttpUtil<ICustomCommonPayload, IRespData>;
     constructor({ urlPrefix, httpUtil, commonPayload }: IBaseConfig<ICustomCommonPayload, IRespData>);
     /** 上报 */
-    report(payload: IPayload): Promise<IRespData>;
+    report<ExtEventType>(payload: IPayload<ExtEventType>): Promise<IRespData>;
     /** 报活 */
     active(): Promise<IRespData>;
     /** 更新 */
