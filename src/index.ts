@@ -1,5 +1,5 @@
 import { URL_PRIFIX } from './config';
-import Log, { ILogType, ICrxInfo, IBaseConfig } from './base';
+import Log, { ILogType, ICrxInfo, IBaseConfig } from './Log';
 
 /**
  * 获取 crx manifest 信息

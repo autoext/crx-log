@@ -85,9 +85,10 @@ class Log<ICustomCommonPayload, IRespData> {
   }
 
   /** 更新 */
-  update() {
+  update(previousVersion: string) {
     return this.report({
       event: EventType.UPDATE,
+      previousVersion,
     });
   }
 

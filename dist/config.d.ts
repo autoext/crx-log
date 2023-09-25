@@ -1,1 +1,1 @@
-export declare const URL_PRIFIX = "http://g8up.chromedevtools.com";
+export declare const URL_PRIFIX = "https://data.autoext.cn";
